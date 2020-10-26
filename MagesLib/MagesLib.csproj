@@ -44,7 +44,9 @@
     <Compile Include="Package\MPK.cs" />
     <Compile Include="Package\MPKEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Script\Reader.cs" />
     <Compile Include="Script\SCX.cs" />
+    <Compile Include="Script\MSBReader.cs" />
     <Compile Include="Script\SCXWriter.cs" />
     <Compile Include="Script\SCXReader.cs" />
     <Compile Include="Script\SCXString.cs" />

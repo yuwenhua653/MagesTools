@@ -72,35 +72,45 @@ namespace MagesTools
                 var patch = new Dictionary<string, List<List<string>>>();
                 foreach (var file in files)
                 {
-                    Log("[SCX Export] Exporting " + Path.GetFileName(file) + " ...");
-                    using (var reader = new SCXReader(File.OpenRead(file), charset))
+                    Reader reader;
+                    if (isMSB.Checked)
                     {
-                        var result = new List<List<string>>();
-                        try
+                        reader = new MSBReader(File.OpenRead(file), charset);
+                        Log("[MSB Export] Exporting " + Path.GetFileName(file) + " ...");
+                    }
+                    else
+                    {
+                        reader = new SCXReader(File.OpenRead(file), charset);
+                        Log("[SCX Export] Exporting " + Path.GetFileName(file) + " ...");
+                    }
+                    
+
+                    var result = new List<List<string>>();
+                    try
+                    {
+                        for (int i = 0; i<reader.StringNum; i++)
                         {
-                            for (int i = 0; !reader.EOF; i++)
+                            var xd = reader.ReadString(i);
+                            var row = new List<string>();
+                            foreach (var t in xd.Tokens)
                             {
-                                var xd = reader.ReadString(i);
-                                var row = new List<string>();
-                                foreach (var t in xd.Tokens)
+                                if (t is TextToken text)
                                 {
-                                    if (t is TextToken text)
-                                    {
-                                        row.Add(text.Value);
-                                    }
-                                }
-                                if (row.Count > 0)
-                                {
-                                    result.Add(row);
+                                    row.Add(text.Value);
                                 }
                             }
+                            if (row.Count > 0)
+                            {
+                                result.Add(row);
+                            }
                         }
-                        catch (Exception ex)
-                        {
-                            Log(ex.Message);
-                        }
-                        patch.Add(Path.GetFileName(file), result);
                     }
+                    catch (Exception ex)
+                    {
+                        Log(ex.Message);
+                    }
+                    patch.Add(Path.GetFileName(file), result);
+
                 }
                 var save = new SaveFileDialog
                 {

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
 
 namespace Mages.Script.Tokens
 {
@@ -6,7 +7,7 @@ namespace Mages.Script.Tokens
     {
         public string Value;
 
-        public TextToken(SCXReader reader) : base(TokenType.TextMask)
+        public TextToken(Reader reader) : base(TokenType.TextMask)
         {
             var sb = new StringBuilder();
             while (true)

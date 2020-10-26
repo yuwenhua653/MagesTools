@@ -57,6 +57,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.textBox_mpk_unpack_input = new System.Windows.Forms.TextBox();
             this.textBox_log = new System.Windows.Forms.TextBox();
+            this.isMSB = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -155,6 +156,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.isMSB);
             this.groupBox3.Controls.Add(this.textBox_scx_charset);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.button_scx_export);
@@ -380,6 +382,16 @@
             this.textBox_log.Size = new System.Drawing.Size(588, 245);
             this.textBox_log.TabIndex = 1;
             // 
+            // isMSB
+            // 
+            this.isMSB.AutoSize = true;
+            this.isMSB.Location = new System.Drawing.Point(487, 23);
+            this.isMSB.Name = "isMSB";
+            this.isMSB.Size = new System.Drawing.Size(66, 16);
+            this.isMSB.TabIndex = 14;
+            this.isMSB.Text = "MSB脚本";
+            this.isMSB.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -438,6 +450,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox checkBox_mpk_pack_ignore_bak;
+        private System.Windows.Forms.CheckBox isMSB;
     }
 }
 

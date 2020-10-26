@@ -6,10 +6,11 @@ using Mages.Script.Tokens;
 
 namespace Mages.Script
 {
-    public class SCXReader : BinaryReader
+    public class SCXReader : BinaryReader , Reader
     {
-        public bool EOF => BaseStream.Position == BaseStream.Length;
         public readonly uint StringTable = 0, ReturnAddressTable = 0;
+
+        public uint StringNum { get; set; }
 
         public string Charset = null;
         public Encoding Encoding = Encoding.UTF8;
@@ -29,6 +30,7 @@ namespace Mages.Script
             Charset = charset;
             StringTable = ReadUInt32();
             ReturnAddressTable = ReadUInt32();
+            StringNum = (ReturnAddressTable - StringTable) / 4;
         }
 
         public T ReadTable<T>(int offset, Func<T> callback)

@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Linq;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Mages.Script.Tokens
 {
@@ -8,7 +9,7 @@ namespace Mages.Script.Tokens
     {
         public List<byte> Value = new List<byte>();
 
-        public ExpressionToken(TokenType type, SCXReader reader) : base(type)
+        public ExpressionToken(TokenType type, Reader reader) : base(type)
         {
             var sb = new StringBuilder();
             while (true)
@@ -28,14 +29,14 @@ namespace Mages.Script.Tokens
                 {
                 case 0:
                     break;
-                case 0b0100000:
+                case 0x20:
                     Value.Add(reader.ReadByte());
                     break;
-                case 0b1000000:
+                case 0x40:
                     Value.Add(reader.ReadByte());
                     Value.Add(reader.ReadByte());
                     break;
-                case 0b1100000:
+                case 0x60:
                     Value.Add(reader.ReadByte());
                     Value.Add(reader.ReadByte());
                     Value.Add(reader.ReadByte());
